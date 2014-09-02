@@ -1,5 +1,5 @@
 <? if ($edit): ?>
-<form class="studip_form" method="post" action="<?= $controller->url_for('show/index/'.$overview->id) ?>">
+    <form class="studip_form" method="post" action="<?= $controller->url_for('show/index/' . $overview->id) ?>">
     <? endif; ?>
     <table class="default">
         <caption>
@@ -36,12 +36,16 @@
                     <tr>
                         <td>
                             <? if ($edit): ?>
-                            <input name="active[<?= $course->seminar_id ?>]" type="checkbox" <?= $course->active ? 'checked' : '' ?> value="1">
+                                <input name="active[<?= $course->seminar_id ?>]" type="checkbox" <?= $course->active ? 'checked' : '' ?> value="1">
                             <? endif; ?>
                             <?= ObjectdisplayHelper::link($course->course) ?>
                         </td>
                         <td>
-                            <?= $course->ects ?>
+                            <? if ($edit): ?>
+                                <input name="ects[<?= $course->seminar_id ?>]" type="text" value="<?= $course->ects ?>">
+                            <? else: ?>
+                                <?= $course->ects ?>
+                            <? endif; ?>
                         </td>
                     </tr>
                 <? endforeach; ?>
