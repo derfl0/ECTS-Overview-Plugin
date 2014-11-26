@@ -20,6 +20,9 @@ class ShowController extends StudipController {
     public function index_action($id = null) {
         // Load edit flag
         $this->edit = Request::get('edit');
+        if ($this->edit) {
+            PageLayout::addScript($this->plugin->getPluginURL().'/assets/application.js');
+        }
 
         $overviews = EctsOverview::findByUser_id($GLOBALS['user']->id);
 

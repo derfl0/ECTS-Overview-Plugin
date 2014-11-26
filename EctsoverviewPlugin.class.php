@@ -20,10 +20,6 @@ class EctsoverviewPlugin extends StudIPPlugin implements SystemPlugin {
         Navigation::addItem('/tools/ectsoverviewplugin', $navigation);
     }
 
-    public function initialize () {
-        PageLayout::addScript($this->getPluginURL().'/assets/application.js');
-    }
-
     public function perform($unconsumed_path) {
         $this->setupAutoload();
         $dispatcher = new Trails_Dispatcher(
