@@ -31,7 +31,7 @@ class EctsOverview extends SimpleORMap {
     }
 
     public function reload() {
-            $stmt = DBManager::get()->prepare('SELECT seminare.* FROM seminar_user JOIN seminare USING (seminar_id) LEFT JOIN ects_courses ON (overview_id = ? AND ects_courses.seminar_id = seminar_user.seminar_id) WHERE user_id = ? AND ects_courses.seminar_id is null');
+            $stmt = DBManager::get()->prepare('SELECT seminare.* FROM seminar_user JOIN seminare USING (seminar_id) LEFT JOIN ects_courses ON (overview_id = ? AND ects_courses.seminar_id = seminar_user.seminar_id) WHERE user_id = ? AND ects_courses.seminar_id is null AND seminare.ects IS NOT NULL');
             $stmt->execute(array($this->id, $GLOBALS['user']->id));
             while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $course = Course::import($data);
