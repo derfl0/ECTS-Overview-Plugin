@@ -85,10 +85,13 @@ class ShowController extends StudipController {
         // If we got fallback redo navigation thingy
         Navigation::activateItem("/tools/ectsoverviewplugin/{$this->overview->id}");
 
-        // And here some sidebar
-        $this->setInfoBoxImage('infobox/board2.jpg');
-        $this->addToInfobox(_('Aktionen'), "<a title='" . _('Weitere Statistik erzeugen') . "' href='" . $this->url_for('show/createNew') . "'>" . _('Weitere Statistik erzeugen') . "</a>");
-        $this->addToInfobox(_('Aktionen'), "<a title='" . _('Statistik löschen') . "' rel='lightbox' href='" . $this->url_for("show/delete/{$this->overview->id}") . "'>" . _('Diese Statistik löschen') . "</a>");
+        $sidebar = Sidebar::Get();
+        $sidebar->setImage('sidebar/log-sidebar.png');
+        $actions = new ActionsWidget();
+        $actions->addLink(_('Weitere Statistik erzeugen'), $this->url_for('show/createNew'));
+        $actions->addLink(_('Statistik löschen'), $this->url_for("show/delete/{$this->overview->id}"));
+        $sidebar->addWidget($actions);
+
     }
 
     public function createNew_action() {
